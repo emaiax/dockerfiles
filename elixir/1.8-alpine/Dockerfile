@@ -8,5 +8,5 @@ RUN apk add --update --no-cache \
       yarn \
       inotify-tools \
 
-RUN mix local.hex --force \
-  && mix local.rebar --force
+RUN mix local.hex --force && \
+  mix local.rebar --force
