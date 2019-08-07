@@ -6,9 +6,15 @@ task :build do
     context    = File.dirname(dockerfile)
     tag        ||= "latest"
 
-    exec %{docker build -t emaiax/#{image}:#{tag} #{context}}
-    exec %{docker login -u #{ENV["DOCKER_USER"]} -p #{ENV["DOCKER_PASSWORD"]}}
-    exec %{docker push emaiax/#{image}:#{tag}}
+    puts
+    puts "Building #{image}:#{tag}..."
+    puts
+
+    unless ENV.fetch("DEBUG", "").empty?
+      run %{docker build -t emaiax/#{image}:#{tag} #{context}}
+      run %{docker login -u #{ENV["DOCKER_USER"]} -p #{ENV["DOCKER_PASSWORD"]}}
+      run %{docker push emaiax/#{image}:#{tag}}
+    end
   end
 end
 
@@ -18,12 +24,7 @@ private
 
 def run(cmd)
   puts "[Running] #{cmd}"
-  %x{#{cmd}} unless ENV["DEBUG"]
-end
-
-def exec(cmd)
-  puts "[Running] #{cmd}"
-  system cmd unless ENV["DEBUG"]
+  %x{#{cmd}}
 end
 
 def changed_files
