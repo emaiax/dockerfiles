@@ -1,7 +1,16 @@
 require "rake"
 
 task :build do
-  changed_files.each do |dockerfile|
+  dockerfiles = changed_files
+
+  if dockerfiles.none?
+    puts
+    puts "No Dockerfiles changed to build."
+
+    exit(-1)
+  end
+
+  dockerfiles.each do |dockerfile|
     image, tag = dockerfile.gsub(/\/Dockerfile/, "").split("/")
     context    = File.dirname(dockerfile)
     tag        ||= "latest"
