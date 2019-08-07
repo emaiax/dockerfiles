@@ -7,7 +7,7 @@ task :build do
     puts
     puts "No Dockerfiles changed to build."
 
-    exit(-1)
+    exit(0)
   end
 
   dockerfiles.each do |dockerfile|
