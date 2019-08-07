@@ -23,7 +23,7 @@ task :build do
       run %{docker build -t emaiax/#{image}:#{tag} #{context}}
 
       unless ENV.fetch("DEPLOY_TO_DOCKER_HUB", "").empty?
-        run %{docker login -u #{ENV["DOCKER_USER"]} -p #{ENV["DOCKER_PASSWORD"]}}
+        run %{docker login -u #{ENV.fetch("DOCKER_USER", "")} -p #{ENV.fetch("DOCKER_PASSWORD", "")}}
         run %{docker push emaiax/#{image}:#{tag}}
       end
     end
