@@ -6,7 +6,7 @@ RUN apk add --update --no-cache \
       build-base \
       git \
       yarn \
-      inotify-tools \
+      inotify-tools
 
 RUN mix local.hex --force && \
   mix local.rebar --force
