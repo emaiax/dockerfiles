@@ -10,7 +10,7 @@ task :build do
     puts "Building #{image}:#{tag}..."
     puts
 
-    unless ENV.fetch("DEBUG", "").empty?
+    if ENV.fetch("DEBUG", "").empty?
       run %{docker build -t emaiax/#{image}:#{tag} #{context}}
       run %{docker login -u #{ENV["DOCKER_USER"]} -p #{ENV["DOCKER_PASSWORD"]}}
       run %{docker push emaiax/#{image}:#{tag}}
