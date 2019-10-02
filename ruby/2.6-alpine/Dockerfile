@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.6.5-alpine
 LABEL maintainer "emaiax <eduvimaia@gmail.com>"
 
 RUN apk add --no-cache --update \
@@ -9,7 +9,6 @@ RUN apk add --no-cache --update \
       less \
       libxml2-dev \
       libxslt-dev \
-      postgresql-dev \
       tzdata
 
 RUN echo "install: --no-document" > $HOME/.gemrc && echo "update: --no-document" >> $HOME/.gemrc
